@@ -6,6 +6,8 @@
 output
 config
 
+*.yaml
+
 ### Java ###
 # Compiled class file
 *.class
