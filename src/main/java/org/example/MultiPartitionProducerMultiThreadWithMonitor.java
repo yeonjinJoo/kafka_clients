@@ -162,9 +162,11 @@ public class MultiPartitionProducerMultiThreadWithMonitor implements Runnable {
       long respondedTime = System.currentTimeMillis();
 
       String messageId = record.value();
+      Integer priority = record.priority();
       monitoringQueue.enqueue(new MonitorLog(
           MonitorLog.RequestType.PRODUCE, 
           messageId, MonitorLog.State.RESPONDED,
+          priority,
           respondedTime, respondedTimeNano
       ));
       monitorLogWriter.notifyIfNeeded();
@@ -198,7 +200,10 @@ public class MultiPartitionProducerMultiThreadWithMonitor implements Runnable {
           String messageId = producerKey + "-" + partitionNum + "-" + String.valueOf(i + 1);
           String message = messageGenerator.generate(messageId);
 
-          ProducerRecord<String, String> record = new ProducerRecord<>(topicName, partitionNum, messageId, message);
+          int priority = new java.util.Random().nextInt(3) + 1;
+
+          // producer request에 priority 추가
+          ProducerRecord<String, String> record = new ProducerRecord<>(topicName, partitionNum, messageId, message, priority);
 
           long requestedTime = System.currentTimeMillis();
           long requestedTimeNano = System.nanoTime() + absTimestampBase;
@@ -210,6 +215,7 @@ public class MultiPartitionProducerMultiThreadWithMonitor implements Runnable {
           monitoringQueue.enqueue(new MonitorLog(
                   MonitorLog.RequestType.PRODUCE,
                   messageId, MonitorLog.State.REQUESTED,
+                  priority,
                   requestedTime, requestedTimeNano
           ));
           monitorLogWriter.notifyIfNeeded();
