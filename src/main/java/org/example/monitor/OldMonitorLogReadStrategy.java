@@ -44,7 +44,7 @@ public class OldMonitorLogReadStrategy implements IMonitorLogReadStrategy {
       String messageId = splittedStr[1];
       long timestamp = Long.parseLong(splittedStr[2]);
       MonitorLog.State state = MonitorLog.State.valueOf(splittedStr[3]);
-      return new MonitorLog(type, messageId, state, timestamp, 0);
+      return new MonitorLog(type, messageId, state, Integer.valueOf(0), timestamp, (long) 0);
     } catch (Exception e) {
       return null;
     }

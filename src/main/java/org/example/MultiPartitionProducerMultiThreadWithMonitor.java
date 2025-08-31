@@ -21,6 +21,9 @@ import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.List;
 
+import org.apache.kafka.common.header.Header;
+import java.nio.ByteBuffer;
+
 @Slf4j
 public class MultiPartitionProducerMultiThreadWithMonitor implements Runnable {
 
@@ -163,7 +166,7 @@ public class MultiPartitionProducerMultiThreadWithMonitor implements Runnable {
 
       String messageId = record.value();
       Header header = record.headers().lastHeader("priority");
-      int priority;
+      int priority = 0;
       if(header != null){
         priority = ByteBuffer.wrap(header.value()).getInt();
       }

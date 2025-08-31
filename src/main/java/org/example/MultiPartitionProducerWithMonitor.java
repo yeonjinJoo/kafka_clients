@@ -116,7 +116,7 @@ public class MultiPartitionProducerWithMonitor implements Runnable {
           monitoringQueue.enqueue(new MonitorLog(
                   MonitorLog.RequestType.PRODUCE,
                   messageId, MonitorLog.State.REQUESTED,
-                  requestedTime, requestedTimeNano
+                  Integer.valueOf(0), requestedTime, requestedTimeNano
           ));
           monitorLogWriter.notifyIfNeeded();
         }
@@ -174,7 +174,7 @@ public class MultiPartitionProducerWithMonitor implements Runnable {
       monitoringQueue.enqueue(new MonitorLog(
           MonitorLog.RequestType.PRODUCE, 
           messageId, MonitorLog.State.RESPONDED,
-          respondedTime, respondedTimeNano
+          Integer.valueOf(0), respondedTime, respondedTimeNano
       ));
       monitorLogWriter.notifyIfNeeded();
 

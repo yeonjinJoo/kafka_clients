@@ -78,7 +78,7 @@ public class BasicConsumerWithMonitor implements Runnable {
         log.debug("fetch {} records.", records.count());
         for (var record: records) {
           log.trace("offset = {}, key = {}, value = {}", record.offset(), record.key(), record.value());
-          monitoringQueue.enqueue(new MonitorLog(MonitorLog.RequestType.CONSUME, record.value(), MonitorLog.State.RESPONDED, curTime, curTimeNano));
+          monitoringQueue.enqueue(new MonitorLog(MonitorLog.RequestType.CONSUME, record.value(), MonitorLog.State.RESPONDED, Integer.valueOf(0), curTime, curTimeNano));
           monitorLogWriter.notifyIfNeeded();
         }
       }

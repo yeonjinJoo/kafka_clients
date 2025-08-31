@@ -106,13 +106,13 @@ public class EarliestConsumerWithMonitor implements Runnable {
         log.debug("fetch {} records.", records.count());
         for (var record: records) {
           log.trace("offset = {}, key = {}, value = {}", record.offset(), record.key(), record.value());
-          monitoringQueue.enqueue(new MonitorLog(RequestType.CONSUME, record.value(), State.REQUESTED, requestTime, requestTimeNano));
+          monitoringQueue.enqueue(new MonitorLog(RequestType.CONSUME, record.value(), State.REQUESTED, Integer.valueOf(0), requestTime, requestTimeNano));
           consumeCnt += 1;
           intervalConsumeCnt += 1;
         }
 
         for (var record: records) {
-          monitoringQueue.enqueue(new MonitorLog(RequestType.CONSUME, record.value(), State.RESPONDED, respondedTime, respondedTimeNano));
+          monitoringQueue.enqueue(new MonitorLog(RequestType.CONSUME, record.value(), State.RESPONDED, Integer.valueOf(0), respondedTime, respondedTimeNano));
         }
 
         if (consumeCnt >= numRecord) {
