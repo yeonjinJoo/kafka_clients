@@ -115,7 +115,7 @@ public class BasicProducerWithMonitor implements Runnable {
         monitoringQueue.enqueue(new MonitorLog(
             MonitorLog.RequestType.PRODUCE, 
             messageId, MonitorLog.State.REQUESTED,
-            curTime, curTimeNano
+            Integer.valueOf(0), curTime, curTimeNano
         ));
         monitorLogWriter.notifyIfNeeded();
       }
@@ -172,7 +172,7 @@ public class BasicProducerWithMonitor implements Runnable {
       monitoringQueue.enqueue(new MonitorLog(
           MonitorLog.RequestType.PRODUCE, 
           messageId, MonitorLog.State.RESPONDED,
-          curTime, curTimeNano
+          Integer.valueOf(0), curTime, curTimeNano
       ));
       monitorLogWriter.notifyIfNeeded();
 

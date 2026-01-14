@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Default configuration file path
-CONFIG_FILE="/Users/jooyeonjin/Desktop/GradProject_Apache_Kafka/execute/kafka-test-clients/multi_producer_config.yaml"
+CONFIG_FILE="/Users/jooyeonjin/Desktop/GradProject_Apache_Kafka/kafka_clients/multi_producer_config.yaml"
 
 
 

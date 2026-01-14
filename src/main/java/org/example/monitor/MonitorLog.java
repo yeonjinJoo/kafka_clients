@@ -17,14 +17,17 @@ public class MonitorLog {
 
   private final State state;
 
+  private final Integer priority;
+
   private final long timestamp;
 
   private final long timestampNano;
   
-  public MonitorLog(RequestType type, String id, State state, long timestamp, long timestampNano) {
+  public MonitorLog(RequestType type, String id, State state, Integer prioirty, long timestamp, long timestampNano) {
     this.type = type;
     this.id = id;
     this.state = state;
+    this.priority = prioirty;
     this.timestamp = timestamp;
     this.timestampNano = timestampNano;
   }
@@ -45,17 +48,19 @@ public class MonitorLog {
     return state;
   }
 
+  public Integer getPriority() { return priority; }
+
   public long getTimestampNano() {
     return timestampNano;
   }
 
   public MonitorLog withMessageId(String messageId) {
-    return new MonitorLog(type, messageId, state, timestamp, timestampNano);
+    return new MonitorLog(type, messageId, state, priority, timestamp, timestampNano);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, id, state);
+    return Objects.hash(type, id, state, priority);
   }
 
   @Override
@@ -66,6 +71,7 @@ public class MonitorLog {
     MonitorLog converted = (MonitorLog) oth;
     return Objects.equals(this.type, converted.type)
         && Objects.equals(this.id, converted.id)
-        && Objects.equals(this.state, converted.state);
+        && Objects.equals(this.state, converted.state)
+        && Objects.equals(this.priority, converted.priority);
   }
 }
